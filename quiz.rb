@@ -14,6 +14,58 @@ QUIZ_TOPICS = ["ruby", "rspec", "testing", "arrays", "objects"]
 # quiz = Quiz.new
 # quiz.add(5)
 # quiz.add(3)
+class Quiz
+  def initialize(numbers = [], trash = [])
+    @numbers = numbers
+    @trash = trash
+  end
+
+  def numbers_as_array
+    @numbers
+  end
+
+  def numbers
+    @numbers.to_s
+  end
+
+  def trash
+    @trash
+  end
+
+  def count(input)
+    self.numbers_as_array.count(input)
+  end
+
+  def rotate(length)
+    self.numbers_as_array.rotate!(length)
+  end
+
+  def count_events
+    even = 0
+    self.numbers_as_array.each do |number|
+      if number.even?
+        even += 1
+      end
+    end
+    return even
+  end
+
+  def add(number)
+    if number.class == Fixnum
+      self.numbers_as_array << number
+    elsif number.class == Array
+      number.each do |index|
+        if index.class == Fixnum
+          self.numbers_as_array << index
+        else
+          self.trash << index
+        end
+      end
+    else
+      self.trash << number
+    end
+  end
+end
 
 # We can see the numbers we've added
 # quiz.numbers => "[5, 3]"
@@ -29,6 +81,8 @@ QUIZ_TOPICS = ["ruby", "rspec", "testing", "arrays", "objects"]
 # We can't access the array directly
 # quiz.numbers.push(5)
 # => undefined method `push'
+
+## SKIPPED
 
 # Trash returns anything we've tried to add that's not a number.
 # quiz.trash => ["7", true]

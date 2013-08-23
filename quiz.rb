@@ -20,10 +20,6 @@ class Quiz
     @trash = trash
   end
 
-  def numbers_as_array
-    @numbers
-  end
-
   def numbers
     @numbers.to_s
   end
@@ -33,16 +29,16 @@ class Quiz
   end
 
   def count(input)
-    self.numbers_as_array.count(input)
+    @numbers.count(input)
   end
 
   def rotate(length)
-    self.numbers_as_array.rotate!(length)
+    @numbers.rotate!(length)
   end
 
   def count_events
     even = 0
-    self.numbers_as_array.each do |number|
+    @numbers.each do |number|
       if number.even?
         even += 1
       end
@@ -52,17 +48,17 @@ class Quiz
 
   def add(number)
     if number.class == Fixnum
-      self.numbers_as_array << number
+      @numbers << number
     elsif number.class == Array
       number.each do |index|
         if index.class == Fixnum
-          self.numbers_as_array << index
+          @numbers << index
         else
-          self.trash << index
+          @trash << index
         end
       end
     else
-      self.trash << number
+      @trash << number
     end
   end
 end
@@ -81,8 +77,6 @@ end
 # We can't access the array directly
 # quiz.numbers.push(5)
 # => undefined method `push'
-
-## SKIPPED
 
 # Trash returns anything we've tried to add that's not a number.
 # quiz.trash => ["7", true]
